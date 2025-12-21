@@ -1,0 +1,376 @@
+/* --- Variables de Thème (Vert Clair) --- */
+:root {
+    --primary-color: #388E3C;   /* Vert foncé pour le texte important */
+    --secondary-color: #4CAF50; /* Vert moyen pour les accents */
+    --light-bg: #E8F5E9;        /* Vert très clair (similaire à la couleur de contact) */
+    --lighter-bg: #F9FCF8;      /* Vert encore plus clair pour le fond de page */
+    
+    /* Dégradés (basés sur le vert) */
+    --main-gradient: linear-gradient(90deg, #66BB6A 0%, #388E3C 100%); 
+    --main-gradient-bg: linear-gradient(135deg, #81C784 0%, #4CAF50 100%); 
+    
+    /* Couleurs de texte et bordure générales */
+    --text-dark: #333;
+    --text-medium: #0c0b0b;
+    --border-light: #ddd;
+}
+
+/* --- STYLES GÉNÉRAUX DE LA SECTION --- */
+#femme-adolescence-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 60px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+    background-color: var(--lighter-bg); 
+    color: var(--text-dark);
+}
+
+/* En-tête de la page */
+.femme-header {
+    margin-top: -55px;
+    text-align: center;
+    background-image: url(/femme\ adogroup.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-clip: unset;
+    border-radius: 10px;
+    width: 100%;
+    height: 400px;
+}
+
+.femme-title {
+    color: var(--primary-color);
+    font-size: 2.5em;
+    padding-top: 150px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.femme-title i {
+    color: var(--secondary-color);
+}
+
+.femme-subtitle {
+    color: var(--text-medium);
+    font-size: 1.3em;
+    line-height: 1.6;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+/* --- BLOC PRINCIPAL (Ensemble vers l'Excellence) --- */
+.femme-main-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-block-content {
+    max-width: 60%;
+}
+
+.main-tag {
+    background: var(--main-gradient);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.main-block-content h3 {
+    color: var(--primary-color);
+    font-size: 2em;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+}
+
+/* Boutons d'action */
+.btn-primary-femme, .btn-secondary-femme {
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-primary-femme {
+    background: var(--main-gradient);
+    color: white;
+}
+
+.btn-primary-femme:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(160, 51, 153, 0.4);
+}
+
+.btn-secondary-femme {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 10px 25px;
+}
+
+.btn-secondary-femme:hover {
+    background-color: var(--light-bg);
+}
+
+/* Image/Icône principale */
+.main-block-image {
+    max-width: 35%;
+    position: relative;
+}
+
+.crown-circle {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, #FFC0CB 0%, #A03399 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.9;
+}
+
+.crown-circle i {
+    color: white;
+    font-size: 4em;
+    opacity: 0.9;
+}
+
+.star-deco {
+    position: absolute;
+    top: -5px;
+    right: 5px;
+    font-size: 2.5em;
+    color: var(--secondary-color);
+    transform: rotate(15deg);
+    opacity: 0.7;
+}
+
+/* --- SECTION NOS ACTIVITÉS --- */
+.activites-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title {
+    color: var(--text-dark);
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.activites-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 60px;
+}
+
+.activite-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    flex: 1 1 calc(33.333% - 20px); 
+    min-width: 280px;
+    border: 1px solid var(--light-bg);
+}
+
+.activite-icon {
+    width: 45px;
+    height: 45px;
+    background-color: var(--light-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.activite-icon i {
+    color: var(--secondary-color);
+    font-size: 1.2em;
+}
+
+.activite-card h4 {
+    color: var(--primary-color);
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+}
+
+/* --- BLOC DE CONTACT ET CHIFFRES CLÉS --- */
+.restons-contact-block {
+    background: var(--main-gradient-bg);
+    color: white;
+    padding: 40px 20px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.contact-icon-mail {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    margin: 0 auto 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-icon-mail i {
+    color: white;
+    font-size: 2em;
+}
+
+.contact-action-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact-email {
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.btn-write-us {
+    background-color: white;
+    color: var(--primary-color);
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+/* Chiffres Clés */
+.chiffres-cles-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: space-around;
+    padding: 0 50px;
+}
+
+.chiffre-card {
+    background-color: white;
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    flex: 1 1 30%;
+    text-align: center;
+    border: 1px solid var(--light-bg);
+}
+
+.chiffre-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--light-bg);
+    border-radius: 50%;
+    margin: 0 auto 15px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chiffre-icon i {
+    color: var(--secondary-color);
+    font-size: 1.5em;
+}
+
+.chiffre-value {
+    font-size: 2.5em;
+    font-weight: 800;
+    color: var(--secondary-color);
+    margin-bottom: 5px;
+}
+
+.chiffre-label {
+    font-size: 0.95em;
+    color: var(--text-medium);
+    font-weight: 500;
+}
+
+/* --- RESPONSIVITÉ (Design simple et efficace) --- */
+
+@media (max-width: 1024px) {
+    .main-block-content {
+        max-width: 55%;
+    }
+}
+
+@media (max-width: 850px) {
+    /* Bloc principal passe en colonne */
+    .femme-main-block {
+        flex-direction: column;
+        padding: 30px;
+    }
+    .main-block-content {
+        max-width: 100%;
+        text-align: center;
+        order: 2;
+    }
+    .main-block-image {
+        max-width: 100%;
+        order: 1;
+        margin-bottom: 30px;
+    }
+    .main-block-actions {
+        justify-content: center;
+    }
+
+    /* Activités passent à deux colonnes */
+    .activites-grid {
+        gap: 15px;
+    }
+    .activite-card {
+        flex: 1 1 calc(50% - 15px); 
+    }
+}
+
+@media (max-width: 600px) {
+    /* Général */
+    #femme-adolescence-page {
+        padding: 40px 15px;
+    }
+    .femme-title {
+        font-size: 2em;
+    }
+
+    /* Activités passent à une colonne */
+    .activite-card {
+        flex: 1 1 100%; 
+    }
+    
+    /* Chiffres clés passent en colonne */
+    .chiffres-cles-grid {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0;
+    }
+    .chiffre-card {
+        flex: 1 1 100%;
+    }
+
+    /* Contact */
+    .contact-action-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

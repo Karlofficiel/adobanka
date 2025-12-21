@@ -104,3 +104,27 @@ Route::get('/commentaire-admin', function () {
 Route::get('/activites-admin', function () {
     return view('activites-admin');
 });
+
+
+
+Route::get('/bourse-user', function () {
+    return view('bourse-user');
+});
+Route::get('/contact-user', function () {
+    return view('contact-user');
+});
+Route::get('/galerie', function () {
+    return view('galerie');
+});
+Route::get('/Activiter-user', function () {
+    return view('Activiter-user');
+});
+Route::get('/A propos-user', function () {
+    return view('A propos-user');
+});
+Route::get('/index', function () {
+    return view('index');
+});
+Route::get('/femmeadolescence-user', function () {
+    return view('femmeadolescence-user');
+});

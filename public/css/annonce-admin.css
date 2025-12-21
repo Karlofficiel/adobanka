@@ -121,3 +121,59 @@
     .card { padding: 4px; }
     .btn-new { font-size: 11px; padding: 4px 6px; }
 }
+
+ .annonces-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+.annonces-table th, .annonces-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.annonces-table th {
+    background-color: #4CAF50;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.annonces-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.annonces-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.annonces-table .btn-sm {
+    padding: 4px 8px;
+    font-size: 0.85rem;
+}
+#btn-spp {
+    background-color: #e3342f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.pagination-simple {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.pagination-simple a {
+    text-decoration: none;
+    color: blue;
+    font-weight: bold;
+}
+
+.pagination-simple span {
+    color: gray;
+    font-weight: bold;
+}
