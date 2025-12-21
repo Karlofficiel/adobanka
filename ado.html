@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Connexion</title>
+  <!-- Font Awesome pour les icônes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Arial, sans-serif}
+    body{
+      height:100vh;display:flex;justify-content:center;align-items:center;
+      background:linear-gradient(135deg,#f0fff4,#f8fafc);
+    }
+    .card{
+      background:#fff;
+      width:380px;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.1);
+      padding:28px 26px;
+      text-align:center;
+    }
+    .icon{
+      width:60px;height:60px;border-radius:50%;background:#059669;
+      display:flex;justify-content:center;align-items:center;
+      margin:0 auto 16px;
+      color:#fff;font-size:28px;
+    }
+    h2{margin-bottom:8px;color:#065f46}
+    p{font-size:14px;color:#374151;margin-bottom:18px}
+    .demo{
+      background:#ecfdf5;
+      border:1px solid #a7f3d0;
+      padding:12px;
+      border-radius:8px;
+      margin-bottom:20px;
+      text-align:left;
+      font-size:14px;
+    }
+    .demo strong{display:block;margin-bottom:6px;color:#065f46}
+    .demo-line{margin-bottom:8px}
+    .badge{
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:6px;
+      font-size:12px;
+      font-weight:bold;
+      color:#fff;
+      margin-right:6px;
+    }
+    .admin{background:#059669}
+    .visiteur{background:#10b981}
+    .form-group{text-align:left;margin-bottom:14px;position:relative}
+    label{font-size:13px;color:#374151;display:block;margin-bottom:4px}
+    input{
+      width:100%;padding:10px 12px 10px 36px;
+      border:1px solid #d1d5db;border-radius:8px;
+      font-size:14px;outline:none;transition:border .2s;
+    }
+    input:focus{border-color:#10b981}
+    .form-group i{
+      position:absolute;left:10px;top:35px;color:#9ca3af;
+    }
+    button{
+      width:100%;padding:12px;margin-top:10px;border:none;border-radius:8px;
+      font-size:15px;font-weight:bold;cursor:pointer;transition:.2s;
+    }
+    .btn-primary{
+      background:#10b981;color:#fff;
+      display:flex;align-items:center;justify-content:center;gap:8px;
+    }
+    .btn-primary:disabled{background:#a7f3d0;cursor:not-allowed}
+    .btn-secondary{
+      background:#fff;border:1px solid #d1d5db;color:#374151;
+    }
+    .btn-secondary:hover{background:#f9fafb}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon"><i class="fa-solid fa-shield"></i></div>
+    <h2>Connexion</h2>
+    <p>Accédez à votre espace Association Excellence & Développement</p>
+
+    <div class="demo">
+      <strong>Comptes de démonstration :</strong>
+      <div class="demo-line">
+        <span class="badge admin">Admin</span> admin / admin123
+      </div>
+      <div class="demo-line">
+        <span class="badge visiteur">Visiteur</span> visiteur / visiteur
+      </div>
+    </div>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Nom d'utilisateur</label>
+        <i class="fa fa-user"></i>
+        <input type="text" id="username" placeholder="Entrez votre nom d'utilisateur">
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <i class="fa fa-lock"></i>
+        <input type="password" id="password" placeholder="Entrez votre mot de passe">
+      </div>
+      <button type="submit" class="btn-primary" id="submitBtn" disabled>
+        <i class="fa fa-sign-in-alt"></i> Se connecter
+      </button>
+      <button type="button" class="btn-secondary" onclick="alert('Connexion en tant que visiteur')">
+        Continuer en tant que visiteur
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function checkInputs(){
+      submitBtn.disabled = !(username.value.trim() && password.value.trim());
+    }
+
+    username.addEventListener('input', checkInputs);
+    password.addEventListener('input', checkInputs);
+
+    form.addEventListener('submit', e=>{
+      e.preventDefault();
+      alert(`Connexion avec : ${username.value} / ${password.value}`);
+    });
+  </script>
+</body>
+</html>

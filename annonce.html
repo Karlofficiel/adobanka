@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Administration – Annonces</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root{
+      --bg:#f6fbf8;
+      --panel:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --border:#e5e7eb;
+      --shadow:0 10px 30px rgba(2,6,23,.06);
+      --green:#16a34a;
+      --green-600:#059669;
+      --red:#ef4444;
+      --red-100:#fee2e2;
+      --amber:#f59e0b;
+      --blue:#3b82f6;
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+
+    /* HEADER */
+    .header{
+      background:var(--panel);
+      padding:14px 22px;
+      display:flex;align-items:center;justify-content:space-between;
+      box-shadow:0 2px 8px rgba(2,6,23,.06);
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand .logo{width:36px;height:36px;border-radius:10px;background:var(--green-600);display:grid;place-items:center;color:#fff;font-size:18px}
+    .brand h1{margin:0;color:var(--green-600);font-size:22px;line-height:1}
+    .brand small{color:var(--muted)}
+    .role{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:14px}
+
+    /* NAV */
+    .nav-card{
+      max-width:1100px;margin:18px auto 0;padding:0 18px;
+    }
+    .nav{
+      background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+      padding:12px 18px;box-shadow:var(--shadow);display:flex;gap:28px;align-items:center;justify-content:flex-start;
+    }
+    .nav a{
+      text-decoration:none;color:#111827;font-weight:600;font-size:14px;display:flex;gap:8px;align-items:center;position:relative;padding:10px 0;
+    }
+    .nav a.active{color:#b91c1c}
+    .nav a.active::after{content:"";position:absolute;left:0;bottom:-8px;height:3px;width:100%;background:#b91c1c;border-radius:4px}
+    .nav a.logout{color:#e11d48;margin-left:auto}
+
+    /* PAGE */
+    .wrap{max-width:1100px;margin:22px auto;padding:0 22px}
+    .header-row{display:flex;justify-content:space-between;align-items:center;margin:10px 0 16px}
+    .page-title{margin:0 0 4px;font-size:22px;color:#14532d}
+    .sub{color:var(--muted)}
+
+    /* Bouton Nouvelle Annonce */
+    .btn-new{
+      display:inline-flex;gap:8px;align-items:center;
+      background:var(--green-600);color:#fff;border:none;border-radius:10px;
+      padding:10px 14px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(5,150,105,.2);
+    }
+
+    /* MODAL */
+    .modal{position:fixed;inset:0;display:none;place-items:center;z-index:50}
+    .modal.open{display:grid;}
+    .backdrop{position:absolute;inset:0;background:rgba(2,6,23,.55)}
+    .dialog{
+      position:relative;background:var(--panel);border-radius:14px;border:1px solid var(--border);
+      width:min(92vw,560px);box-shadow:0 24px 60px rgba(2,6,23,.35);
+      padding:16px; z-index:1;
+    }
+    .dialog header{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px}
+    .dialog h3{margin:0;font-size:18px}
+    .x{border:none;background:transparent;font-size:18px;cursor:pointer;color:#64748b}
+
+    .form-group{margin-bottom:14px}
+    .form-group label{display:block;font-size:13px;margin-bottom:4px;color:#374151}
+    .input-icon{position:relative}
+    .input-icon i{
+      position:absolute;top:50%;left:10px;transform:translateY(-50%);
+      color:#6b7280;font-size:14px;
+    }
+    textarea,input,select{
+      width:100%;padding:10px 12px 10px 32px;border-radius:10px;border:1px solid #cbd5e1;background:#f1f5f9;color:#0f172a;outline:none;
+    }
+    textarea{min-height:80px;resize:vertical}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+    .switch{display:flex;align-items:center;gap:10px;font-weight:600;color:#0f172a}
+    .switch input{display:none}
+    .switch label{width:42px;height:22px;background:#e5e7eb;border-radius:999px;position:relative;cursor:pointer}
+    .switch label::after{
+      content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s;
+    }
+    .switch input:checked + label{background:var(--green-600)}
+    .switch input:checked + label::after{transform:translateX(20px)}
+
+    .actions{display:flex;gap:10px;justify-content:flex-end;padding-top:6px}
+    .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:#fff;color:#0f172a;cursor:pointer;font-weight:700}
+    .btn-green{background:var(--green-600);color:#fff}
+    .btn:hover{opacity:.9}
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="brand">
+      <div class="logo"><i class="fa-solid fa-gear"></i></div>
+      <div>
+        <h1>Administration</h1>
+        <small>Association Excellence & Développement</small>
+      </div>
+    </div>
+    <div class="role"><i class="fa-regular fa-user"></i> Visiteur ⟶ <i class="fa-solid fa-user-shield"></i> Admin</div>
+  </header>
+
+  <!-- NAV -->
+  <div class="nav-card">
+    <nav class="nav">
+      <a href="v1.html"><i class="fa-solid fa-gauge"></i> Tableau de bord</a>
+      <a href="annonce.html" class="active"><i class="fa-solid fa-bullhorn"></i> Annonces</a>
+      <a href="#"><i class="fa-solid fa-comments"></i> Commentaires</a>
+      <a href="notification.html"><i class="fa-solid fa-bell"></i> Notifications</a>
+      <a href="#"><i class="fa-solid fa-file"></i> Publications</a>
+      <a href="dex.html" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a>
+    </nav>
+  </div>
+
+  <!-- PAGE -->
+  <div class="wrap">
+    <div class="header-row">
+      <div>
+        <h2 class="page-title">Gestion des Annonces Urgentes</h2>
+        <div class="sub">4 annonces au total • <span style="color:#16a34a;font-weight:700">2 actives</span></div>
+      </div>
+      <button class="btn-new" id="openModal"><i class="fa-solid fa-plus"></i> Nouvelle Annonce</button>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+<form action="">
+  <div class="modal" id="modal">
+    <div class="backdrop" id="backdrop"></div>
+    <div class="dialog">
+      <header>
+        <h3>Nouvelle Annonce Urgente</h3>
+        <button class="x" id="closeX"><i class="fa-solid fa-xmark"></i></button>
+      </header>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <div class="input-icon">
+          <i class="fa-regular fa-message"></i>
+          <textarea id="message" placeholder="Saisissez le message de l’annonce…"></textarea>
+        </div>
+      </div>
+
+      <div class="row2">
+        <div class="form-group">
+          <label for="type">Type d’annonce</label>
+          <div class="input-icon">
+            <i class="fa-solid fa-flag"></i>
+            <select id="type">
+              <option>Information</option>
+              <option>Urgent</option>
+              <option>Succès</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="date">Date d’expiration</label>
+          <div class="input-icon">
+            <i class="fa-regular fa-calendar-days"></i>
+            <input type="date" id="date">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group switch">
+        <input type="checkbox" id="actif" checked>
+        <label for="actif"></label>
+        <i class="fa-solid fa-power-off"></i> Activer immédiatement
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="cancel">Annuler</button>
+        <button class="btn btn-green" id="create">Créer</button>
+      </div>
+    </div>
+  </div>
+ </form>
+
+
+  <script>
+    const modal = document.getElementById('modal');
+    const openModalBtn = document.getElementById('openModal');
+    const closeBtns = [document.getElementById('closeX'), document.getElementById('cancel'), document.getElementById('backdrop')];
+
+    function openModal(){ modal.classList.add('open'); }
+    function closeModal(){ modal.classList.remove('open'); }
+
+    openModalBtn.addEventListener('click', openModal);
+    closeBtns.forEach(el=> el.addEventListener('click', closeModal));
+
+    document.getElementById('create').addEventListener('click', ()=>{
+      alert("Annonce créée !");
+      closeModal();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Administration – Notifications</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Glyphicons modernes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root{
+      --bg:#f6fbf8;
+      --panel:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --border:#e6e8ee;
+      --shadow:0 10px 30px rgba(2,6,23,.06);
+      --green:#16a34a; --green-600:#059669; --green-100:#dcfce7;
+      --purple:#6d28d9; --purple-500:#7c3aed; --purple-grad:linear-gradient(90deg,#7c3aed,#9333ea);
+      --red:#e11d48; --red-100:#fee2e2;
+      --blue:#3b82f6; --blue-100:#e0f2fe;
+      --amber:#f59e0b; --amber-100:#fff7ed;
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 80% 20%, rgba(5,150,105,.06), transparent 60%),
+        radial-gradient(900px 500px at 0% 100%, rgba(34,197,94,.06), transparent 60%),
+        var(--bg);
+    }
+
+    /* HEADER */
+    .header{
+      background:var(--panel);
+      padding:14px 22px;
+      display:flex;align-items:center;justify-content:space-between;
+      box-shadow:0 2px 8px rgba(2,6,23,.06);
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand .logo{
+      width:36px;height:36px;border-radius:10px;background:var(--green-600);
+      display:grid;place-items:center;color:#fff;font-size:18px
+    }
+    .brand h1{margin:0;color:var(--green-600);font-size:22px;line-height:1}
+    .brand small{color:var(--muted)}
+    .role{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:14px}
+
+    /* NAV */
+    .nav-wrap{max-width:1100px;margin:18px auto 0;padding:0 18px}
+    .nav{
+      background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+      padding:12px 18px;box-shadow:var(--shadow);display:flex;gap:30px;align-items:center;
+    }
+    .nav a{
+      text-decoration:none;color:#111827;font-weight:700;font-size:14px;
+      display:flex;gap:8px;align-items:center;position:relative;padding:10px 16px;border-radius:12px;
+    }
+    .nav a:hover{background:#f3f4f6}
+    .nav a.active{
+      color:#fff;background:var(--purple-grad);box-shadow:0 8px 22px rgba(124,58,237,.28);
+    }
+    .nav a.logout{color:#e11d48;margin-left:auto;background:transparent}
+    .nav a.logout:hover{background:#fef2f2}
+
+    /* PAGE WRAP */
+    .wrap{max-width:1100px;margin:22px auto;padding:0 22px}
+    .top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+    .title{font-size:24px;color:#14532d;margin:0}
+    .subtitle{color:var(--muted);margin-top:6px}
+    .btn-new{
+      display:inline-flex;gap:8px;align-items:center;background:var(--green-600);color:#fff;border:none;
+      border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer;box-shadow:0 6px 18px rgba(5,150,105,.22);
+    }
+
+    /* CARDS LIST */
+    .list{display:grid;gap:14px}
+    .card{
+      background:var(--panel);border:1px solid var(--border);border-radius:14px;
+      box-shadow:var(--shadow);padding:16px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:flex-start;
+    }
+    .icon{
+      width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:18px;
+    }
+    .i-alert{background:#10b981}
+    .i-pub{background:#60a5fa}
+    .i-remind{background:#22c55e}
+
+    .badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+    .badge{
+      font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid;
+      display:inline-flex;gap:6px;align-items:center
+    }
+    .b-urgent{background:var(--red-100); color:#991b1b; border-color:#fecaca}
+    .b-update{background:#dcfce7; color:#166534; border-color:#bbf7d0}
+    .b-remind{background:var(--amber-100); color:#9a3412; border-color:#fed7aa}
+    .b-audience{background:#f3f4f6; color:#374151; border-color:#e5e7eb}
+
+    .card-title{font-weight:800;margin-bottom:8px}
+    .card p{margin:0;color:#111827}
+    .meta{margin-top:8px;color:#6b7280;font-size:13px}
+
+    /* MODAL */
+    .modal{position:fixed;inset:0;display:none;place-items:center;z-index:50}
+    .modal.open{display:grid;}
+    .backdrop{position:absolute;inset:0;background:rgba(2,6,23,.55);backdrop-filter:blur(2px)}
+    .dialog{
+      position:relative;background:var(--panel);border-radius:14px;border:1px solid var(--border);
+      width:min(92vw,560px);box-shadow:0 24px 60px rgba(2,6,23,.35);
+      padding:16px; z-index:1;
+    }
+    .dialog header{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px}
+    .dialog h3{margin:0;font-size:18px}
+    .x{border:none;background:transparent;font-size:18px;cursor:pointer;color:#64748b}
+
+    .form{display:grid;gap:14px}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .form label{display:block;font-size:13px;margin-bottom:4px;color:#374151}
+
+    .input-icon{position:relative}
+    .input-icon i{position:absolute;top:50%;left:10px;transform:translateY(-50%);color:#6b7280;font-size:14px}
+    input[type="text"], select, textarea{
+      width:100%;padding:10px 12px 10px 32px;border-radius:10px;border:1px solid #cbd5e1;background:#f1f5f9;color:#0f172a;outline:none;
+    }
+    textarea{min-height:90px;resize:vertical}
+
+    .dialog .actions{display:flex;gap:10px;justify-content:flex-end;padding-top:6px}
+    .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:#fff;color:#0f172a;cursor:pointer;font-weight:800}
+    .btn-green{background:var(--green-600);color:#fff;border-color:#16a34a}
+    .btn:hover{opacity:.9}
+
+    @media (max-width:560px){
+      .row2{grid-template-columns:1fr}
+      .dialog{padding:12px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="brand">
+      <div class="logo"><i class="fa-solid fa-gear"></i></div>
+      <div>
+        <h1>Administration</h1>
+        <small>Association Excellence & Développement</small>
+      </div>
+    </div>
+    <div class="role"><i class="fa-regular fa-user"></i> Visiteur &nbsp;<i class="fa-solid fa-toggle-on"></i>&nbsp; <i class="fa-solid fa-user-shield"></i> Admin</div>
+  </header>
+
+  <!-- NAV -->
+  <div class="nav-wrap">
+    <nav class="nav">
+      <a href="v1.html"><i class="fa-solid fa-gauge"></i> Tableau de bord</a>
+      <a href="annonce.html"><i class="fa-solid fa-bullhorn"></i> Annonces</a>
+      <a href="#"><i class="fa-solid fa-comments"></i> Commentaires</a>
+      <a href="notification.html" class="active"><i class="fa-solid fa-bell"></i> Notifications</a>
+      <a href="#"><i class="fa-solid fa-file"></i> Publications</a>
+      <a href="dex.html" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a>
+    </nav>
+  </div>
+
+  <!-- PAGE -->
+  <div class="wrap">
+    <div class="top-row">
+      <div>
+        <h2 class="title">Gestion des Notifications</h2>
+        <div class="subtitle">Envoyez des notifications push aux utilisateurs de l'association</div>
+      </div>
+      <button class="btn-new" id="openModal"><i class="fa-regular fa-bell"></i> Nouvelle Notification</button>
+    </div>
+
+    <!-- LISTE DES NOTIFICATIONS -->
+    <section class="list">
+
+      <!-- Carte 1 -->
+      <article class="card">
+        <div class="icon i-alert"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <div>
+          <div class="badges">
+            <span class="card-title">Alerte urgente</span>
+            <span class="badge b-urgent"><i class="fa-solid fa-bolt"></i> Urgent</span>
+            <span class="badge b-audience"><i class="fa-solid fa-users"></i> Tous les utilisateurs</span>
+          </div>
+          <p>Prolongation exceptionnelle des candidatures de bourses jusqu'au 15 février. Profitez-en !</p>
+          <div class="meta">Envoyée le 18 janvier 2025 à 17:45 par Direction Générale</div>
+        </div>
+      </article>
+
+      <!-- Carte 2 -->
+      <article class="card">
+        <div class="icon i-pub"><i class="fa-solid fa-bullhorn"></i></div>
+        <div>
+          <div class="badges">
+            <span class="card-title">Nouvelle publication</span>
+            <span class="badge b-update"><i class="fa-solid fa-arrow-rotate-right"></i> Mise à jour</span>
+            <span class="badge b-audience"><i class="fa-solid fa-user-lock"></i> Membres seulement</span>
+          </div>
+          <p>Découvrez notre nouveau partenariat avec l'Université Centrale et les opportunités qu'il offre.</p>
+          <div class="meta">Envoyée le 19 janvier 2025 à 16:30 par Équipe Communication</div>
+        </div>
+      </article>
+
+      <!-- Carte 3 -->
+      <article class="card">
+        <div class="icon i-remind"><i class="fa-regular fa-clock"></i></div>
+        <div>
+          <div class="badges">
+            <span class="card-title">Rappel important</span>
+            <span class="badge b-remind"><i class="fa-solid fa-bell"></i> Rappel</span>
+            <span class="badge b-audience"><i class="fa-solid fa-users"></i> Tous les utilisateurs</span>
+          </div>
+          <p>N'oubliez pas : la date limite pour les candidatures de bourses est dans 5 jours !</p>
+          <div class="meta">Envoyée le 20 janvier 2025 à 10:00 par Système automatique</div>
+        </div>
+      </article>
+
+    </section>
+  </div>
+
+  <!-- MODAL : NOUVELLE NOTIFICATION -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-labelledby="titre-modal">
+    <div class="backdrop" id="backdrop"></div>
+    <div class="dialog">
+      <header>
+        <h3 id="titre-modal">Envoyer une Notification Push</h3>
+        <button class="x" id="closeX" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+      </header>
+<form action="" method="post">
+      <div class="form">
+        <div class="row2">
+          <div>
+            <label for="title">Titre</label>
+            <div class="input-icon">
+              <i class="fa-solid fa-heading"></i>
+              <input id="title" type="text" placeholder="Titre de la notification">
+            </div>
+          </div>
+          <div>
+            <label for="type">Type</label>
+            <div class="input-icon">
+              <i class="fa-solid fa-circle-info"></i>
+              <select id="type">
+                <option>Information</option>
+                <option>Urgent</option>
+                <option>Mise à jour</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label for="audience">Audience cible</label>
+          <div class="input-icon">
+            <i class="fa-solid fa-users"></i>
+            <select id="audience">
+              <option>Tous les utilisateurs</option>
+              <option>Membres seulement</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="message">Message</label>
+          <div class="input-icon">
+            <i class="fa-regular fa-message"></i>
+            <textarea id="message" placeholder="Contenu de la notification…"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="cancel">Annuler</button>
+        <button class="btn btn-green" id="send"><i class="fa-regular fa-paper-plane"></i> Envoyer</button>
+      </div>
+    </div>
+  </div>
+</form>
+  <script>
+    // Ouverture/fermeture du modal
+    const modal = document.getElementById('modal');
+    const openBtn = document.getElementById('openModal');
+    const closeBtn = document.getElementById('closeX');
+    const cancelBtn = document.getElementById('cancel');
+    const backdrop = document.getElementById('backdrop');
+
+    const open = () => { modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); };
+    const close = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); };
+
+    openBtn.addEventListener('click', open);
+    [closeBtn, cancelBtn, backdrop].forEach(el => el.addEventListener('click', close));
+    window.addEventListener('keydown', e => { if(e.key === 'Escape' && modal.classList.contains('open')) close(); });
+
+    // Démo d’envoi
+    document.getElementById('send').addEventListener('click', () => {
+      const title = document.getElementById('title').value.trim();
+      const msg = document.getElementById('message').value.trim();
+      if(!title || !msg){ alert('Merci de remplir Titre et Message.'); return; }
+      alert('Notification envoyée !');
+      close();
+    });
+  </script>
+</body>
+</html>
