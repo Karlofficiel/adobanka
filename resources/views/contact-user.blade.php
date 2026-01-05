@@ -2,9 +2,12 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>contact Adolescence Banka</title>
     <link rel="stylesheet" href="{{ asset('css/contact-user.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link rel="stylesheet" href="{{ asset('css/footer-header-user.css') }}">
   </head>
   <body>
@@ -96,49 +99,64 @@
         <p>Nous sommes à votre écoute ! Que vous souhaitiez obtenir des informations sur nos programmes, postuler pour une bourse, ou simplement nous faire part de vos suggestions, n'hésitez pas à nous contacter.</p>
     </div>
 
+    
     <div class="contact-content">
         <div class="contact-form-card">
             <div class="card-header">
                 <i class="fas fa-paper-plane"></i>
                 <h3>Envoyez-nous un message</h3>
             </div>
-            <form id="contact-form" action="votre_script_backend.php" method="POST" id="from">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="full_name">Nom complet *</label>
-                        <input type="text" id="full_name" name="full_name" placeholder="Votre nom complet" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" placeholder="votre.email@lrexemple.com" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="phone">Téléphone</label>
-                        <input type="tel" id="phone" name="phone" placeholder="+237 XX XX XX XX">
-                    </div>
-                    <div class="form-group">
-                        <label for="motif">Motif de contact</label>
-                        <select id="motif" name="motif">
-                            <option value="general">Question générale</option>
-                            <option value="bourse">Demande d'information Bourse</option>
-                            <option value="partenariat">Partenariat</option>
-                            <option value="suggerence">Suggestion</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group full-width">
-                    <label for="subject">Sujet *</label>
-                    <input type="text" id="subject" name="subject" placeholder="Objet de votre message" required>
-                </div>
-                <div class="form-group full-width">
-                    <label for="message">Message *</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Écrivez votre message ici..." required></textarea>
-                </div>
-                <button type="submit">Envoyer</button>
-                <p id="form-feedback" class="feedback-message"></p>
-            </form>
+     @if(session('success'))
+        <p style="color: green;">{{ session('success') }}</p>
+    @endif
+
+
+           <form id="contact-form" action="{{ route('contact.store') }}" method="POST">
+    @csrf
+
+    <div class="form-row">
+        <div class="form-group">
+            <label>Nom complet *</label>
+            <input type="text" name="full_name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email *</label>
+            <input type="email" name="email" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label>Téléphone</label>
+            <input type="tel" name="phone">
+        </div>
+
+        <div class="form-group">
+            <label>Motif</label>
+            <select name="motif">
+                <option value="general">Question générale</option>
+                <option value="bourse">Demande Bourse</option>
+                <option value="partenariat">Partenariat</option>
+                <option value="suggestion">Suggestion</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Sujet *</label>
+        <input type="text" name="subject" required>
+    </div>
+
+    <div class="form-group">
+        <label>Message *</label>
+        <textarea name="message" rows="5" required></textarea>
+    </div>
+
+    <button type="submit">Envoyer</button>
+
+</form>
+
         </div>
 
         <div class="contact-info-card">
@@ -389,7 +407,7 @@
         <p>Consultez notre section commentaires pour voir les questions fréquemment posées ou laissez votre propre question à la communauté.</p>
 
         <a href="URL_DE_VOTRE_SECTION_FAQ" class="help-button">
-            <i class="fas fa-comments"></i> Accéder aux commentaires
+            <i class="fas fa-comments" ></i> Accéder aux commentaires
         </a>
     </div>
 
@@ -514,31 +532,41 @@
   <div class="comment-modal-content">
     <button id="comment-modal-close" class="comment-modal-close" title="Fermer">&times;</button>
     <h3>Laisser un commentaire</h3>
-    <form id="floating-comment-form">
-      <div class="form-group">
-        <label for="floating-name">Nom complet *</label>
-        <input type="text" id="floating-name" name="name" required placeholder="Votre nom complet">
-      </div>
-      <div class="form-group">
-        <label for="floating-email">Email *</label>
-        <input type="email" id="floating-email" name="email" required placeholder="votre.email@exemple.com">
-      </div>
-      <div class="form-group">
-        <label for="floating-type">Type de commentaire *</label>
-        <select id="floating-type" name="type" required>
-          <option value="">Choisissez...</option>
-          <option value="suggestion">Suggestion</option>
-          <option value="question">Question</option>
-          <option value="avis">Avis</option>
+    
+    <form id="floating-comment-form"
+      action="{{ route('message.store') }}"
+      method="POST">
+    @csrf
+
+    <div class="form-group">
+        <label>Nom complet *</label>
+        <input type="text" name="name" required placeholder="Votre nom complet">
+    </div>
+
+    <div class="form-group">
+        <label>Email *</label>
+        <input type="email" name="email" required placeholder="Votre adresse email">
+    </div>
+
+    <div class="form-group">
+        <label>Type *</label>
+        <select name="type" required class="form-control" placeholder="Choisissez le type de message">
+            <option value="">Choisissez...</option>
+            <option value="suggestion">Suggestion</option>
+            <option value="question">Question</option>
+            <option value="avis">Avis</option>
         </select>
-      </div>
-      <div class="form-group">
-        <label for="floating-message">Message *</label>
-        <textarea id="floating-message" name="message" required placeholder="Votre commentaire..." rows="4"></textarea>
-      </div>
-      <button type="submit" class="comment-modal-submit">Envoyer</button>
-      <div id="floating-comment-feedback" class="feedback-message"></div>
-    </form>
+    </div>
+
+    <div class="form-group">
+        <label>Message *</label>
+        <textarea name="message" required placeholder="Votre message"></textarea>
+    </div>
+    
+    <button type="submit" class="comment-modal-submit">Envoyer</button>
+</form>
+
+
   </div>
 </div>
 

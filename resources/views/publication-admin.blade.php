@@ -114,6 +114,11 @@
     <button class="action-btn preview">
         <span class="glyphicon glyphicon-eye-open"></span> Prévisualiser
     </button>
+
+    <button class="action-btn preview" data-id="{{ $publication->id }}">
+        <span class="glyphicon glyphicon-eye-open"></span> {{ $publication->statut }}
+    </button>
+    
 </div>
         </div>
 

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    @php use Illuminate\Support\Str; @endphp
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Administrateur - Association Excellence & Développement</title>
     <link rel="stylesheet" href="{{ asset('css/contact-admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/administration.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashbord-admin.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
@@ -42,7 +44,7 @@
             </div>
             <div class="dashboard-user">
                 <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Admin">
-                <span> </span>
+                <span><span style="font-weight:600;font-size:32px;">{{$admin->nom}} </span> &nbsp; Admin </span>
             </div>
         </div>
 
@@ -50,38 +52,78 @@
         <div class="top-actions">
             <div class="page-header">
             <h2>Gestion des profils utilisateurs du site</h2>
-            <div class="stats">200 contacts deja enregistrer</div>
+            <div class="stats"><b>{{ $totalContacts }}</b> <b>Contacts deja enregistrer</b></div>
             </div>
         </div>
 
         <div class="container mt-4">
     <h3 class="mb-3"></h3>
 
-    <table class="table table-bordered table-striped">
-        <thead class="table-success">
-            <tr>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Origine</th>
-                <th>E-mail</th>
-                <th>Mot De Passe</th>
-                <th>Action</th>
-            </tr>
-        </thead>
+   @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
-        <tbody>
+<table class="table table-bordered table-striped">
+    <thead class="table-success">
+        <tr>
+            <th>Nom Complet</th>
+            <th>E-mail</th>
+            <th>Téléphone</th>
+            <th>Motif</th>
+            <th>Sujet</th>
+            <th>Message</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @forelse($contacts as $contact)
             <tr>
-                <td>val1</td>
-                <td>val1</td>
-                <td>val1</td>
-                <td>val1</td>
-                <td>val1</td>
-                <td>val1</td>
+                <td>{{ $contact->full_name }}</td>
+                <td>{{ $contact->email }}</td>
+                <td>{{ $contact->phone ?? '-' }}</td>
+                <td>{{ ucfirst($contact->motif) }}</td>
+                <td>{{ $contact->subject }}</td>
+                <td>{{ Str::limit($contact->message, 50) }}</td>
+                <td>
+                    <form action="{{ route('admin.contacts.destroy', $contact->id) }}"
+                          method="POST"
+                          onsubmit="return confirm('Supprimer ce message ?')">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger btn-sm">
+                            Supprimer
+                        </button>
+                    </form>
+                </td>
             </tr>
-        </tbody>
-    </table>
+        @empty
+            <tr>
+                <td colspan="7" class="text-center">
+                    Aucun message trouvé
+                </td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
+ <div class="pagination-simple">
+    @if ($contacts->onFirstPage())
+        <span>Précédent</span>
+    @else
+        <a href="{{ $contacts->previousPageUrl() }}">Précédent</a>
+    @endif
+
+    @if ($contacts->hasMorePages())
+        <a href="{{ $contacts->nextPageUrl() }}">Suivant</a>
+    @else
+        <span>Suivant</span>
+    @endif
+  </div>
+
 </div>
-
+ <br>
         <section class="dashboard-overview fade-in">
             <div class="overview-card">
                 <div style="font-weight:600;margin-bottom:8px;">Overview</div>

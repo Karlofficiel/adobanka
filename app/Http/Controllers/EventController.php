@@ -25,6 +25,7 @@ class EventController extends Controller
             'message' => 'required|string',
             'type' => 'required|string',
             'year' => 'required|integer|min:1900|max:2100',
+            'voir_plus' => 'required|string',
         ]);
 
         // Upload image si présente
@@ -37,15 +38,14 @@ class EventController extends Controller
         return back()->with('success', 'Historique créé avec succès.');
     }
 
-   public function update(Request $request, $id)
+public function update(Request $request, Event $event)
 {
-    $event = Event::findOrFail($id);
-
     $data = $request->validate([
         'image' => 'nullable|image|mimes:jpg,png,jpeg,webp|max:2048',
         'message' => 'required|string',
         'type' => 'required|string',
         'year' => 'required|integer|min:1900|max:2100',
+        'voir_plus' => 'required|string',
     ]);
 
     if ($request->hasFile('image')) {
@@ -60,6 +60,7 @@ class EventController extends Controller
 
     return back()->with('success', 'Historique mis à jour.');
 }
+
 
 
     public function destroy(Event $event)

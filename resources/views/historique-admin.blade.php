@@ -103,6 +103,17 @@
                 <i class="fa-solid fa-pen"></i> Modifier
             </button>
 
+            
+       <!-- Bouton Voir Plus -->
+        <button class="btn-edit" onclick="toggleVoirPlus({{ $event->id }})">
+            <i class="fa-solid fa-arrow-right"></i> Voir Plus
+        </button>
+
+        <p id="voir-plus-{{ $event->id }}" class="event-voir-plus" style="display:none;">
+            {{ $event->voir_plus }}
+        </p>
+       
+
             <form action="{{ route('events.destroy', $event->id) }}" 
                   method="POST" style="display:inline">
                 @csrf
@@ -117,6 +128,13 @@
 </div>
 @endforeach
 
+
+<script>
+function toggleVoirPlus(id) {
+    const elem = document.getElementById('voir-plus-' + id);
+    elem.style.display = (elem.style.display === 'none') ? 'block' : 'none';
+}
+</script>
    
   <!-- MODAL NOUVEAU -->
   <div class="modal" id="modalNew">
@@ -154,6 +172,7 @@
                       <option value="fondation">Fondation</option>
                       <option value="etape">Étape clé</option>
                       <option value="expansion">Expansion</option>
+                      <option value="recompenses">Recompenses</option>
                   </select>
               </div>
           </div>
@@ -165,6 +184,13 @@
                   <input type="number" id="newYear" name="year" placeholder="2024" min="1900" max="2100">
               </div>
           </div>
+
+         <div class="form-group"> 
+            <label for="voir_plus">Voir Plus</label>
+            <i class="fa-solid fa-arrow-right"></i>
+            <input type="text" name="voir_plus" id="voir_plus" placeholder="Lien vers plus d'informations (optionnel)">
+        </div>
+
 
           <div class="form-actions">
               <button type="button" class="btn-cancel" onclick="closeNewModal()">Annuler</button>
@@ -183,8 +209,11 @@
         <h3>Modifier l'Événement</h3>
         <button class="x" onclick="closeEditModal()"><i class="fa-solid fa-xmark"></i></button>
       </header>
-            <form id="formEdit"
-      method="POST"
+
+
+@foreach ($events as $event)
+
+<form method="POST"
       action="{{ route('events.update', $event->id) }}"
       enctype="multipart/form-data">
 
@@ -192,47 +221,40 @@
     @method('PUT')
 
     <div class="form-group">
-        <label for="editImage">Image</label>
-        <div class="input-icon">
-            <i class="fa-solid fa-image"></i>
-            <input type="file" id="editImage" name="image" accept="image/*">
-        </div>
+        <label>Image</label>
+        <input type="file" name="image">
     </div>
 
     <div class="form-group">
-        <label for="editMessage">Description</label>
-        <div class="input-icon">
-            <i class="fa-solid fa-message"></i>
-            <textarea id="editMessage" name="message"
-                placeholder="Description de l'événement…">{{ old('message', $event->message) }}</textarea>
-        </div>
+        <label>Description</label>
+        <textarea name="message">{{ old('message', $event->message) }}</textarea>
     </div>
 
     <div class="form-group">
-        <label for="editType">Type d'événement</label>
-        <div class="input-icon">
-            <i class="fa-solid fa-tag"></i>
-            <select id="editType" name="type">
-                <option value="fondation" {{ $event->type == 'fondation' ? 'selected' : '' }}>Fondation</option>
-                <option value="etape" {{ $event->type == 'etape' ? 'selected' : '' }}>Étape clé</option>
-                <option value="expansion" {{ $event->type == 'expansion' ? 'selected' : '' }}>Expansion</option>
-            </select>
-        </div>
+        <label>Type</label>
+        <select name="type">
+            <option value="fondation" {{ $event->type === 'fondation' ? 'selected' : '' }}>Fondation</option>
+            <option value="etape" {{ $event->type === 'etape' ? 'selected' : '' }}>Étape clé</option>
+            <option value="expansion" {{ $event->type === 'expansion' ? 'selected' : '' }}>Expansion</option>
+               <option value="recompenses" {{ $event->type === 'recompenses' ? 'selected' : '' }}>recompenses</option>
+        </select>
     </div>
 
     <div class="form-group">
-        <label for="editYear">Année</label>
-        <div class="input-icon">
-            <i class="fa-solid fa-calendar"></i>
-            <input type="number" id="editYear" name="year"
-                   value="{{ old('year', $event->year) }}"
-                   min="1900" max="2100">
-        </div>
+        <label>Année</label>
+        <input type="number" name="year" value="{{ old('year', $event->year) }}">
+    </div>
+
+    <div class="form-group">
+        <label>Voir plus</label>
+        <input type="text" name="voir_plus" value="{{ old('voir_plus', $event->voir_plus) }}">
     </div>
 
     <button type="submit" class="btn-submit">Modifier</button>
+
 </form>
 
+@endforeach
 
     </div>
   </div>

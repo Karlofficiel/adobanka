@@ -14,6 +14,7 @@ return new class extends Migration
             $table->text('message');                  // message de l'événement
             $table->string('type');                   // fondation, étape, expansion
             $table->integer('year');                  // année
+            $table->string('voir_plus')->nullable();  // lien vers plus d'informations
             $table->timestamps();
         });
     }

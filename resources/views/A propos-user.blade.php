@@ -87,194 +87,86 @@
         </div>
       </nav>
 
-       <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content left">
-            <div class="timeline-card">
-              <div class="card-header">
-                <div class="card-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="3" y="4" width="18" height="18" rx="2" stroke="white" stroke-width="2"/>
-                    <line x1="3" y1="9" x2="21" y2="9" stroke="white" stroke-width="2"/>
-                    <line x1="8" y1="1" x2="8" y2="5" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="16" y1="1" x2="16" y2="5" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                <div class="card-year-label">
-                  <span class="year-number">1995</span>
-                  <span class="year-badge">Fondation</span>
-                </div>
-              </div>
+      @foreach ($events as $event)
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="timeline-marker"></div>
 
-              <h3 class="card-title">Fondation de l'Association Adolescence Banka</h3>
+    <div class="timeline-content left">
+      <div class="timeline-card">
 
-              <p class="card-description">
-                Création de l'association par un groupe de ressortissants de Banka déterminés à soutenir l'éducation des jeunes de leur communauté.
-              </p>
+        <!-- HEADER -->
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="4" width="18" height="18" rx="2" stroke="white" stroke-width="2"/>
+              <line x1="3" y1="9" x2="21" y2="9" stroke="white" stroke-width="2"/>
+              <line x1="8" y1="1" x2="8" y2="5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <line x1="16" y1="1" x2="16" y2="5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
 
-              <div class="card-footer">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="3" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-                  <line x1="2" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="1.5"/>
-                  <line x1="5" y1="1" x2="5" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="11" y1="1" x2="11" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                 <STRong><span class="card-date">Année 1995</span><p><a href="#" style="text-decoration: none; color:green;"> VOIR PLUS.........</a></p></STRong>
-              </div>
-            </div>
-            <div class="timeline-year-bg">1995</div>
+          <div class="card-year-label">
+            <span class="year-number">{{ $event->year }}</span>
+            <span class="year-badge">{{ ucfirst($event->type) }}</span>
           </div>
         </div>
 
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content right">
-            <div class="timeline-card">
-              <div class="card-header">
-                <div class="card-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div class="card-year-label">
-                  <span class="year-number">1998</span>
-                  <span class="year-badge">Étape clé</span>
-                </div>
-              </div>
+        <!-- TITRE -->
+        <h3 class="card-title">
+          {{ ucfirst($event->type) }} de l'Association Adolescence Banka
+        </h3>
 
-              <h3 class="card-title">Première Bourse Adolescence Banka</h3>
+        <!-- DESCRIPTION -->
+        <p class="card-description">
+          {{ $event->message }}
+        </p>
 
-              <p class="card-description">
-                Lancement du premier programme de bourses d'études pour soutenir les élèves méritants de la communauté Banka dans leur parcours académique.
-              </p>
+        <!-- FOOTER -->
+        <div class="card-footer">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="3" width="12" height="12" rx="1.5"
+              stroke="currentColor" stroke-width="1.5"/>
+            <line x1="2" y1="6" x2="14" y2="6"
+              stroke="currentColor" stroke-width="1.5"/>
+            <line x1="5" y1="1" x2="5" y2="4"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="11" y1="1" x2="11" y2="4"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
 
-              <div class="card-footer">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="3" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-                  <line x1="2" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="1.5"/>
-                  <line x1="5" y1="1" x2="5" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="11" y1="1" x2="11" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                <STRong><span class="card-date">Année 1998</span><p><a href="#" style="text-decoration: none; color:green;">VOIR PLUS.........</a></p></STRong>
-              </div>
-            </div>
-            <div class="timeline-year-bg">1998</div>
-          </div>
+          <strong>
+                    <span class="card-date">Année {{ $event->year }}</span>
+            <p>
+              <!-- Lien VOIR PLUS -->
+              <a href="javascript:void(0);" 
+                onclick="showMessage({{ $event->id }})" 
+                style="text-decoration:none; color:green;">
+                VOIR PLUS.........
+              </a>
+            </p>
+
+            <!-- Message complet caché par défaut -->
+            <p id="full-message-{{ $event->id }}" style="display:none; margin-top:5px;">
+              {{ $event->message }}
+            </p>
+
+          </strong>
         </div>
 
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content left">
-            <div class="timeline-card">
-              <div class="card-header">
-                <div class="card-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21Z" stroke="white" stroke-width="2"/>
-                    <path d="M12 7V17M7 12H17" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                <div class="card-year-label">
-                  <span class="year-number">2005</span>
-                  <span class="year-badge">Développement</span>
-                </div>
-              </div>
-
-              <h3 class="card-title">Extension des Programmes</h3>
-
-              <p class="card-description">
-                Expansion des activités avec l'ajout de programmes de mentorat et de soutien scolaire pour accompagner les jeunes tout au long de leur scolarité.
-              </p>
-
-              <div class="card-footer">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="3" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-                  <line x1="2" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="1.5"/>
-                  <line x1="5" y1="1" x2="5" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="11" y1="1" x2="11" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                <STRong><span class="card-date">Année 2005</span><p><a href="#" style="text-decoration: none; color:green;">VOIR PLUS.........</a></p></STRong>
-              </div>
-            </div>
-            <div class="timeline-year-bg">2005</div>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content right">
-            <div class="timeline-card">
-              <div class="card-header">
-                <div class="card-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
-                    <path d="M12 6V12L16 14" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                <div class="card-year-label">
-                  <span class="year-number">2015</span>
-                  <span class="year-badge">Croissance</span>
-                </div>
-              </div>
-
-              <h3 class="card-title">100 Bourses Attribuées</h3>
-
-              <p class="card-description">
-                Franchissement d'un cap important avec plus de 100 bourses d'études attribuées depuis la création de l'association, impactant positivement des centaines de familles.
-              </p>
-
-              <div class="card-footer">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="3" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-                  <line x1="2" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="1.5"/>
-                  <line x1="5" y1="1" x2="5" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="11" y1="1" x2="11" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                <STRong><span class="card-date">Année 2015</span><p><a href="#" style="text-decoration: none; color:green;">VOIR PLUS.........</a></p></STRong>
-              </div>
-            </div>
-            <div class="timeline-year-bg">2015</div>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-marker active"></div>
-          <div class="timeline-content left">
-            <div class="timeline-card">
-              <div class="card-header">
-                <div class="card-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="white" stroke-width="2"/>
-                    <path d="M9 12L11 14L15 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div class="card-year-label">
-                  <span class="year-number">2025</span>
-                  <span class="year-badge">Aujourd'hui</span>
-                </div>
-              </div>
-
-              <h3 class="card-title">30 Ans d'Engagement</h3>
-
-              <p class="card-description">
-                Célébration de trois décennies d'engagement pour l'éducation et le développement de la jeunesse Banka, avec des centaines de jeunes accompagnés vers la réussite.
-              </p>
-
-              <div class="card-footer">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="3" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-                  <line x1="2" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="1.5"/>
-                  <line x1="5" y1="1" x2="5" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="11" y1="1" x2="11" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                <STRong><span class="card-date">Année 2025</span><p><a href="#" style="text-decoration: none; color:green;">VOIRE PLUS.........</a></p></STRong>
-              </div>
-            </div>
-            <div class="timeline-year-bg">2025</div>
-          </div>
-        </div>
       </div>
+
+      <div class="timeline-year-bg">{{ $event->year }}</div>
+    </div>
+  </div>
+</div>
+@endforeach
+      
     </main>
+
+
         <main class="stats-container">
       <div class="stats-grid">
         <div class="stat-card">
@@ -286,7 +178,7 @@
               <line x1="21" y1="4" x2="21" y2="10" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
             </svg>
           </div>
-          <div class="stat-number">1</div>
+          <div class="stat-number">{{ $fondations }}</div>
           <div class="stat-label">Fondations</div>
         </div>
 
@@ -299,7 +191,7 @@
               <line x1="21" y1="4" x2="21" y2="10" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
             </svg>
           </div>
-          <div class="stat-number">2</div>
+          <div class="stat-number">{{ $expansions }}</div>
           <div class="stat-label">Expansions</div>
         </div>
 
@@ -309,7 +201,7 @@
               <path d="M16 4L18.472 11.528L26 14L18.472 16.472L16 24L13.528 16.472L6 14L13.528 11.528L16 4Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-          <div class="stat-number">2</div>
+          <div class="stat-number">{{ $recompenses }}</div>
           <div class="stat-label">Récompenses</div>
         </div>
 
@@ -320,7 +212,7 @@
               <path d="M8 26C8 22.6863 10.6863 20 14 20H18C21.3137 20 24 22.6863 24 26" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
             </svg>
           </div>
-          <div class="stat-number">4</div>
+          <div class="stat-number">{{ $etapes}}</div>
           <div class="stat-label">Étape clés</div>
         </div>
       </div>
@@ -373,5 +265,15 @@
 
 <script src="{{ asset('js/a propos-user.js') }}"></script>
 <script src="{{ asset('js/footer-header-user.js') }}"></script>
+  <script type="text/javascript" >
+    function showMessage(id) {
+    const msg = document.getElementById('full-message-' + id);
+    msg.style.display = 'block';
+}
+
+  </script>
 </body>
 </html>
+
+
+

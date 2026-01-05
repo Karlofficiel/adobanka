@@ -63,6 +63,19 @@ class PublicationController extends Controller
         return back()->with('success', 'Publication supprimée avec succès !');
     }
 
+    public function updateStatut($id)
+{
+    $publication = Publication::findOrFail($id);
+
+    // Basculer le statut
+    $publication->statut = $publication->statut === 'En cour' ? 'Terminé' : 'En cour';
+    $publication->save();
+
+    return response()->json([
+        'statut' => $publication->statut
+    ]);
+}
+
     
 }
 

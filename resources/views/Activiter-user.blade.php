@@ -116,132 +116,87 @@
       <div class="content-container">
         <div class="tab-content active" id="publications">
           <div class="publications-list">
-            <article class="publication-card">
-              <div class="card-left">
-                <div class="card-icon announcement">
-                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M22 8L18 12L22 16V8Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M18 8H8C6.89543 8 6 8.89543 6 10V14C6 15.1046 6.89543 16 8 16H18V8Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M10 16V19C10 19.5523 10.4477 20 11 20H12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div class="card-content">
-                  <div class="card-header-info">
-                    <h3 class="card-title">Lancement du Programme de Mentorat des bourse  Jeunes Banka 2025</h3>
-                    <span class="card-badge">Annonce</span>
-                  </div>
-                  <div class="card-meta">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="2" y="3" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-                      <line x1="2" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="1.5"/>
-                      <line x1="5" y1="1" x2="5" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                      <line x1="11" y1="1" x2="11" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                    <span class="card-date">15 janvier 2025</span>
-                    <span class="card-separator">•</span>
-                    <span class="card-author">Par Commission Jeunesse</span>
-                  </div>
-                  <p class="card-description">
-                      Nous sommes fiers d'annoncer le lancement de notre nouveau programme de mentorat qui connectera nos anciens boursiers avec les nouveaux candidats de la communauté Banka. Ce programme vise à créer un réseau de soutien durable pour notre jeunesse.
-                  </p>
-                  <div class="card-tags">
-                    <span class="tag">#mentorat</span>
-                    <span class="tag">#jeunesse</span>
-                    <span class="tag">#banka</span>
-                    <span class="tag">#2025</span>
-                  </div>
-                </div>
-              </div>
-              <div class="card-image">
-                <img src="{{ asset('img/photo groupe.jpg') }}" alt="Programme de mentorat">
-              </div>
-            </article>
+              
+      <div class="content-container">
+        <div class="tab-content active" id="publications">
+          <div class="content-container">
+    <div class="tab-content active" id="publications">
+        <div class="publications-list">
 
-            <article class="publication-card">
-              <div class="card-left">
-                <div class="card-icon event">
-                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="5" y="6" width="18" height="18" rx="2" stroke="white" stroke-width="2.5"/>
-                    <line x1="5" y1="11" x2="23" y2="11" stroke="white" stroke-width="2.5"/>
-                    <line x1="10" y1="3" x2="10" y2="8" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-                    <line x1="18" y1="3" x2="18" y2="8" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-                    <circle cx="10" cy="16" r="1.5" fill="white"/>
-                    <circle cx="14" cy="16" r="1.5" fill="white"/>
-                    <circle cx="18" cy="16" r="1.5" fill="white"/>
-                  </svg>
-                </div>
-                <div class="card-content">
-                  <div class="card-header-info">
-                    <h3 class="card-title">Assemblée Générale 2022 - "Unité et Développement"</h3>
-                    <span class="card-badge event-badge">Événement</span>
-                  </div>
-                  <div class="card-meta">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="2" y="3" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-                      <line x1="2" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="1.5"/>
-                      <line x1="5" y1="1" x2="5" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                      <line x1="11" y1="1" x2="11" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                    <span class="card-date">10 janvier 2025</span>
-                    <span class="card-separator">•</span>
-                    <span class="card-author">Par Bureau Exécutif</span>
-                  </div>
-                  <p class="card-description">
-                    Notre assemblée générale annuelle aura lieu le 15 mars 2025 à Banka. Rejoignez-nous pour faire le bilan de nos actions et définir ensemble l'avenir de notre association et de notre communauté.
-                  </p>
-                  <div class="card-tags">
-                    <span class="tag">#assemblée</span>
-                    <span class="tag">#banka</span>
-                    <span class="tag">#développement</span>
-                  </div>
-                </div>
-              </div>
-              <div class="card-image">
-                <img src="{{ asset('img/img3.JPG') }}" alt="Assemblée générale">
-              </div>
-            </article>
+            @forelse ($publications as $publication)
+    <article class="publication-card">
+        <div class="card-left">
+            <div class="card-icon announcement">
+                <!-- SVG inchangé -->
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 8L18 12L22 16V8Z" stroke="white" stroke-width="2.5"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M18 8H8C6.89543 8 6 8.89543 6 10V14C6 15.1046 6.89543 16 8 16H18V8Z"
+                          stroke="white" stroke-width="2.5"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 16V19C10 19.5523 10.4477 20 11 20H12"
+                          stroke="white" stroke-width="2.5"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
 
-            <article class="publication-card">
-              <div class="card-left">
-                <div class="card-icon success">
-                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M14 3L16.5 8.5L23 9.5L18.5 13.5L19.5 20L14 17L8.5 20L9.5 13.5L5 9.5L11.5 8.5L14 3Z" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+            <div class="card-content">
+                <div class="card-header-info">
+                    <h3 class="card-title">{{ $publication->titre }}</h3>
+                    <span class="card-badge">{{ $publication->type ?? 'Annonce' }}</span>
                 </div>
-                <div class="card-content">
-                  <div class="card-header-info">
-                    <h3 class="card-title">Cérémonie de Remise des Bourses 2024</h3>
-                    <span class="card-badge success-badge">Succès</span>
-                  </div>
-                  <div class="card-meta">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="2" y="3" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-                      <line x1="2" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="1.5"/>
-                      <line x1="5" y1="1" x2="5" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                      <line x1="11" y1="1" x2="11" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+
+                <div class="card-meta">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="3" width="12" height="12" rx="1.5"
+                              stroke="currentColor" stroke-width="1.5"/>
+                        <line x1="2" y1="6" x2="14" y2="6"
+                              stroke="currentColor" stroke-width="1.5"/>
+                        <line x1="5" y1="1" x2="5" y2="4"
+                              stroke="currentColor" stroke-width="1.5"
+                              stroke-linecap="round"/>
+                        <line x1="11" y1="1" x2="11" y2="4"
+                              stroke="currentColor" stroke-width="1.5"
+                              stroke-linecap="round"/>
                     </svg>
-                    <span class="card-date">28 décembre 2024</span>
+
+                    <span class="card-date">{{ $publication->created_at->translatedFormat('d F Y') }}</span>
                     <span class="card-separator">•</span>
-                    <span class="card-author">Par Commission Bourses</span>
-                  </div>
-                  <p class="card-description">
-                    Grande réussite pour notre cérémonie annuelle de remise des bourses avec 25 nouveaux bénéficiaires. Un moment émouvant qui témoigne de l'engagement continu de notre association envers l'éducation.
-                  </p>
-                  <div class="card-tags">
-                    <span class="tag">#bourses</span>
-                    <span class="tag">#éducation</span>
-                    <span class="tag">#cérémonie</span>
-                    <span class="tag">#2024</span>
-                  </div>
+                    <span class="card-author">Par {{ $publication->auteur ?? 'Administration' }}</span>
                 </div>
-              </div>
-              <div class="card-image">
-                <img src="{{ asset('img/bourse.JPG') }}" alt="Cérémonie de remise">
-              </div>
-            </article>
-          </div>
+
+                <p class="card-description">
+                    {{ Str::limit($publication->message, 200) }}
+                </p>
+
+                <div class="card-tags">
+                    @foreach (explode(',', $publication->tags ?? '') as $tag)
+                        @if ($tag)
+                            <span class="tag">#{{ trim($tag) }}</span>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
         </div>
 
+        <!-- <div class="card-image">
+            <img src="{{ asset('storage/' . $publication->image) }}"
+                 alt="{{ $publication->titre }}">
+        </div> -->
+    </article>
+
+@empty
+    <p>Aucune publication disponible.</p>
+@endforelse
+
+        </div>
+    </div>
+</div>
+        </div>  
+        
+<!-- 
         <div class="tab-content" id="activites">
           <div class="publications-list">
             <article class="publication-card">
@@ -331,8 +286,8 @@
             </article>
           </div>
         </div>
-      </div>
-    </main>
+      </div>-->
+    </main> 
 
 
  <!-- Footer -->

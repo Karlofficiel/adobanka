@@ -11,5 +11,6 @@ class Event extends Model
         'message',
         'type',
         'year',
+        'voir_plus',
     ];
 }

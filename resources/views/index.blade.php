@@ -35,23 +35,20 @@
         </div>
       </header>
 
-        @foreach($affiche as $index => $annonce)
-            <div class="notification" id="notif-{{ $index }}">
+      <!-- Notifications -->
+            <div class="notification" id="notif-container">
                 <div class="notif-icon">
                     ❗
                 </div>
 
                 <div class="notif-content">
-                    <h4>{{ $annonce->type }}</h4>
-                    <p>{{ $annonce->message }}</p>
+                    <h4></h4>
+                    <p></p>
                     <span class="notif-read">Marquer comme lu</span>
                 </div>
 
                 <button class="notif-close" onclick="closeNotif($index)">✕</button>
             </div>
-        @endforeach
-
-
 
       <!-- Navigation -->
       <nav class="navigation">
