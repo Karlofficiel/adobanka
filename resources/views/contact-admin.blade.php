@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Administrateur - Association Excellence & Développement</title>
-    <link rel="stylesheet" href="({{ asset('css/contact-admin.css') }})">
+    <link rel="stylesheet" href="{{ asset('css/contact-admin.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashbord-admin.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">  
 </head>
@@ -55,30 +55,98 @@
         </div>
 
         <h3 class="mb-3"></h3>
+<div class="employee-form-wrapper">
+    <form class="employee-form" action="{{ route('contacts.store') }}" method="POST" enctype="multipart/form-data">
+@csrf
+        <h3 class="employee-form-title">Informations personnelles</h3>
 
-    <table class="table table-bordered table-striped">
-        <thead class="table-success">
-            <tr>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Origine</th>
-                <th>E-mail</th>
-                <th>Mot De Passe</th>
-                <th>Action</th>
-            </tr>
-        </thead>
+        <!-- Ligne 1 -->
+        <div class="employee-form-row">
+            <div class="employee-form-group">
+                <label>Nom complet</label>
+                <input type="text" name="nom" required>
+            </div>
 
-        <tbody>
+            <div class="employee-form-group">
+                <label>Poste</label>
+                <input type="text" name="poste" required>
+            </div>
+        </div>
+
+        <!-- Ligne 2 -->
+        <div class="employee-form-row">
+            <div class="employee-form-group">
+                <label>Numéro de téléphone</label>
+                <input type="tel" name="telephone" required>
+            </div>
+
+            <div class="employee-form-group">
+                <label>Adresse Gmail</label>
+                <input type="email" name="email" required>
+            </div>
+        </div>
+
+        <!-- Ligne 3 (image seule) -->
+        <div class="employee-form-group">
+            <label>Photo</label>
+            <input type="file" name="image" accept="image/*" required>
+        </div>
+
+        <button type="submit" class="employee-form-btn">
+            Enregistrer
+        </button>
+
+    </form>
+</div>
+
+
+<br>
+<table class="table table-bordered table-striped">
+    <thead class="table-success">
+        <tr>
+            <th>Image</th>
+            <th>Nom Complet</th>
+            <th>Poste</th>
+            <th>Numéro de téléphone</th>
+            <th>Adresse Gmail</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @forelse($employees as $employee)
             <tr>
-                <td>val1</td>
-                <td>val1</td>
-                <td>val1</td>
-                <td>val1</td>
-                <td>val1</td>
-                <td>val1</td>
+                <td>
+                    @if($employee->image)
+                        <img src="{{ asset('storage/' . $employee->image) }}" 
+                             alt="photo" 
+                             width="60" height="60" 
+                             style="object-fit:cover; border-radius:4px;">
+                    @else
+                        N/A
+                    @endif
+                </td>
+                <td>{{ $employee->nom }}</td>
+                <td>{{ $employee->poste }}</td>
+                <td>{{ $employee->telephone }}</td>
+                <td>{{ $employee->email }}</td>
+                <td>
+                    <!-- Actions: modifier / supprimer -->
+                    <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" style="display:inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Supprimer cette Personne ?')">Supprimer</button>
+                    </form>
+                </td>
             </tr>
-        </tbody>
-    </table>
+        @empty
+            <tr>
+                <td colspan="6" class="text-center">Aucun employé trouvé.</td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
+
 </div>
         <section class="dashboard-overview fade-in">
             <div class="overview-card">

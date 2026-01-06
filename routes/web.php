@@ -14,6 +14,7 @@ use App\Http\Controllers\ContactAdminController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\activiteruserController;
 use App\Http\Controllers\eventsiteController;
+use App\Http\Controllers\ajoutposteController;
 
 
 // Gestion de la connexion admin
@@ -95,7 +96,16 @@ Route::middleware(['auth.check'])->group(function () {
             // Afficher la liste des messages contact
             Route::get('/administration', [ContactAdminController::class, 'index'])->name('admin.contacts.index');
             // Supprimer un message contact
-            Route::delete('/administration/{id}', [ContactAdminController::class, 'destroy'])->name('admin.contacts.destroy');   
+            Route::delete('/administration/{id}', [ContactAdminController::class, 'destroy'])->name('admin.contacts.destroy');  
+            
+        // Gestion des contacts-admin utilisateur
+
+            // Afficher la page des contacts-admin utilisateur
+            Route::get('/contact-admin', [ajoutposteController::class, 'index'])->name('contact.admin');
+            // Enregistrer un nouveau contact-admin utilisateur
+            Route::post('/contact-admin', [ajoutposteController::class, 'store'])->name('contacts.store');
+            // Supprimer un contact-admin utilisateur
+            Route::delete('/contact-admin/{id}', [ajoutposteController::class, 'destroy'])->name('employees.destroy');
 });
 
 // Site utilisateur 
@@ -104,9 +114,13 @@ Route::middleware(['auth.check'])->group(function () {
 Route::get('/contact-user', [ContactController::class, 'index'])->name('contact.user'); 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-// page Contact Commentaire via MessageController    
+// page Contact poste - user
 
+
+// page Contact Commentaire via MessageController    
 Route::post('/contact-user', [MessageController::class, 'store'])->name('message.store');
+
+
 
 
 // page activiter user
@@ -131,9 +145,7 @@ Route::get('/activites-admin', function () {
     return view('activites-admin');
 });
 
-Route::get('/contact-admin', function () {
-    return view('contact-admin');
-});
+
 
 
 

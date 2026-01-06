@@ -262,25 +262,29 @@
 
         <div class="bureau-grid">
 
+                @foreach($employees as $employee)
             <div class="member-card">
                 <div class="member-icon-circle">
-                    <i class="fas fa-users-crown"><img src="{{ asset('img/presi social.jpg') }}" alt=""></i>
+                    <img src="{{ asset('storage/' . $employee->image) }}" alt="{{ $employee->nom }}" width="100" 
+     height="100" 
+     style="object-fit:cover; border-radius:50%;">
                 </div>
-                <h3 class="member-name">NSIEBETCHEU MAURICE </h3>
-                <p class="member-role">Président social</p>
+                <h3 class="member-name">{{ $employee->nom }}</h3>
+                <p class="member-role">{{ $employee->poste }}</p>
                 <div class="member-contact-info">
                     <div class="contact-line">
                         <i class="fas fa-phone-alt phone-icon"></i>
-                        <a href="tel:+22376123456">+237 76 12 34 56</a>
+                        <a href="tel:{{ $employee->telephone }}">{{ $employee->telephone }}</a>
                     </div>
                     <div class="contact-line">
                         <i class="fas fa-envelope email-icon"></i>
-                        <a href="mailto:president@adolescencebanka.org">nsiebetcheumaurice@gmail.com</a>
+                        <a href="mailto:{{ $employee->email }}">{{ $employee->email }}</a>
                     </div>
                 </div>
             </div>
+        @endforeach
 
-            <div class="member-card">
+        <div class="member-card">
                 <div class="member-icon-circle">
                     <i class="fas fa-users-crown"><img src="{{ asset('img/presi bourse.JPG') }}" alt=""></i>
                 </div>
@@ -297,60 +301,8 @@
                     </div>
                 </div>
             </div>
-            <div class="member-card">
-                <div class="member-icon-circle">
-                    <i class="fas fa-users-crown"><img src="{{ asset('img/presi finance.jpg') }}" alt=""></i>
-                </div>
-                <h3 class="member-name">MONKAM FOSSIPE JUSTICE </h3>
-                <p class="member-role">president financier</p>
-                <div class="member-contact-info">
-                    <div class="contact-line">
-                        <i class="fas fa-phone-alt phone-icon"></i>
-                        <a href="tel:+2370987654">+237 51 14 25 80</a>
-                    </div>
-                    <div class="contact-line">
-                        <i class="fas fa-envelope email-icon"></i>
-                        <a href="mailto:secretaire@adolescencebanka.org">nakamfossipe@gmail.com</a>
-                    </div>
-                </div>
-            </div>
+             
 
-            <div class="member-card">
-                <div class="member-icon-circle">
-                    <i class="fas fa-users-crown"><img src="{{ asset('img/presi executif.jpg') }}" alt=""></i>
-                </div>
-                <h3 class="member-name">KEUNI SÉBASTIEN </h3>
-                <p class="member-role">president executif</p>
-                <div class="member-contact-info">
-                    <div class="contact-line">
-                        <i class="fas fa-phone-alt phone-icon"></i>
-                        <a href="tel:+237365432109">+237 65 43 21 09</a>
-                    </div>
-                    <div class="contact-line">
-                        <i class="fas fa-envelope email-icon"></i>
-                        <a href="mailto:tresorier@adolescencebanka.org">keinisebastien@gmail.com
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="member-card">
-                <div class="member-icon-circle">
-                    <i class="fas fa-users-crown"><img src="{{ asset('img/femme adogroup.jpg') }} " alt=""></i>
-                </div>
-                <h3 class="member-name">Mariam DIARRA</h3>
-                <p class="member-role">Présidente Section Femmes</p>
-                <div class="member-contact-info">
-                    <div class="contact-line">
-                        <i class="fas fa-phone-alt phone-icon"></i>
-                        <a href="tel:+22378654321">+237 78 65 43 21</a>
-                    </div>
-                    <div class="contact-line">
-                        <i class="fas fa-envelope email-icon"></i>
-                        <a href="mailto:femmes@adolescencebanka.org">mariam diarra@gmail.com</a>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </div>

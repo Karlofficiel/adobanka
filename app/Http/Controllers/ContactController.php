@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use App\Models\ajoutposte;
+use Illuminate\Support\Facades\Storage;
+
 
 class ContactController extends Controller
 {
     public function index()
-    {
-        return view('contact-user');
+    {   $employees = ajoutposte::all(); // récupère tous les employés
+        return view('contact-user', compact('employees'));
     }
 
     public function store(Request $request)
