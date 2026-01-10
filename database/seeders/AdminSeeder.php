@@ -15,22 +15,28 @@ class AdminSeeder extends Seeder
         DB::table('admins')->insert([
             [
                 'nom' => 'adobanka',
+                'nom_utilisateur' => 'adobanka_admin',
                 'email' => 'admin1@adobanka.com',
                 'password' => Hash::make('adobanka1234'),
+                'is_admin' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'nom' => 'ngounou',
+                'nom_utilisateur' => 'ngounou_admin',
                 'email' => 'admin2@adobanka.com',
                 'password' => Hash::make('ngounou1234'),
+                'is_admin' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'nom' => 'karl',
+                'nom_utilisateur' => 'karl_admin',
                 'email' => 'admin3@adobanka.com',
                 'password' => Hash::make('karl1234'),
+                'is_admin' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

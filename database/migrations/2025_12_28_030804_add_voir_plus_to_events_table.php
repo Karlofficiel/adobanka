@@ -8,7 +8,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->string('voir_plus')->nullable()->after('message'); 
+        if (!Schema::hasColumn('events', 'voir_plus')) {
+            $table->string('voir_plus')->nullable()->after('message');
+        }
             // nullable car ce champ est optionnel
         });
     }

@@ -130,6 +130,7 @@
         <li><a href="bource-user">Bourse adolescence</a></li>
         <li><a href="femmeadolescence-user">section femme adolescence</a></li>
         <li><a href="contact-user">contact</a></li>
+        <li><a href="connexion">S'inscrire</a></li>
       </ul>
     </div>
 

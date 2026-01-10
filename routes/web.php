@@ -23,16 +23,18 @@ use App\Http\Controllers\ajoutposteController;
     Route::get('connexion', [AdminController::class, 'showLoginForm'])->name('login.form');
     // Traiter la soumission du formulaire de connexion
     Route::post('admin/login', [AdminController::class, 'login'])->name('login.submit');
+
+    //Traiter la soumission du formulaire d'inscription 
+    Route::post('admin/register', [AdminController::class, 'register'])->name('register.submit');
+
     
-    // Route::get('/index-admin', [indexController::class, 'index']);
+    // Page d'accueil admin
+    Route::get('/index-admin', [AdminController::class, 'indexAdmin'])->name('index.admin')->middleware('auth:admin'); // important pour utiliser le guard admin
+
 
 Route::middleware(['auth.check'])->group(function () {
 
-        // Page d'accueil admin
-            Route::get('/index-admin', function () {
-                return view('index-admin');
-            });
-
+        
         // Gestion deS médias
 
             // Afficher la page des médias admin
@@ -114,9 +116,6 @@ Route::middleware(['auth.check'])->group(function () {
 Route::get('/contact-user', [ContactController::class, 'index'])->name('contact.user'); 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-// page Contact poste - user
-
-
 // page Contact Commentaire via MessageController    
 Route::post('/contact-user', [MessageController::class, 'store'])->name('message.store');
 
@@ -133,14 +132,12 @@ Route::get('/A propos-user', [eventsiteController::class, 'index'])->name('event
 
 
 
-
-
-
-
+// Page commentaire admin
 Route::get('/commentaire-admin', function () {
     return view('commentaire-admin');
 });
 
+// Page activites admin
 Route::get('/activites-admin', function () {
     return view('activites-admin');
 });
@@ -151,7 +148,7 @@ Route::get('/activites-admin', function () {
 
 
 
-
+// Pages site utilisateur hors du middelxware auth.check
 Route::get('/bourse-user', function () {
     return view('bourse-user');
 });

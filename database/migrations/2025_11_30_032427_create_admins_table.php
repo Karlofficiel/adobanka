@@ -12,7 +12,9 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('email')->unique();
+           $table->string('nom_utilisateur')->unique();
             $table->string('password'); // mot de passe haché
+            $table->boolean('is_admin')->default(false);
             $table->timestamps();
         });
     }
