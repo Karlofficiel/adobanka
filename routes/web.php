@@ -32,19 +32,34 @@ use App\Http\Controllers\ajoutposteController;
     Route::get('/index-admin', [AdminController::class, 'indexAdmin'])->name('index.admin')->middleware('auth:admin'); // important pour utiliser le guard admin
 
 
+
+
+        // Page commentaire admin non traiter
+    Route::get('/commentaire-admin', function () {
+        return view('commentaire-admin');
+    });
+
+    // Page activites admin non traiter
+    Route::get('/activites-admin', function () {
+        return view('activites-admin');
+    });
+
+
+
 Route::middleware(['auth.check'])->group(function () {
 
         
-        // Gestion deS médias
+        // Gestion deS médias (il manque la route delete)
 
             // Afficher la page des médias admin
             Route::get('/media-admin', [MediaController::class, 'index'])->name('medias.index');
             // Enregistrer un nouveau média
             Route::post('/media-admin', [MediaController::class, 'store'])->name('medias.store');
 
+
         //Gestion des annonces
 
-            // afficher des annonces
+            // afficher des annonces fini
             Route::get('/annonce-admin', [AnnonceController::class, 'index'])->name('annonce.admin');
             // Activer/Désactiver
             Route::patch('/annonce/{id}/toggle', [AnnonceController::class, 'toggleActif'])->name('annonce.toggle');
@@ -53,9 +68,10 @@ Route::middleware(['auth.check'])->group(function () {
             // suppression annonces
             Route::delete('/annonce/{id}', [AnnonceController::class, 'destroy'])->name('annonce.destroy');
     
+
         //Gestion des publications
 
-            // afficher des publications
+            // afficher des publications fini
             Route::get('/publication-admin', [PublicationController::class, 'index'])->name('publication.admin');
             // creation publications
             Route::post('/publications', [PublicationController::class, 'store'])->name('publications.store');
@@ -66,7 +82,8 @@ Route::middleware(['auth.check'])->group(function () {
             // mise a jour du statut publication
             Route::post('/publications/{id}/statut', [PublicationController::class, 'updateStatut'])->name('publications.updateStatut');
 
-        // Gestion des notifications
+
+        // Gestion des notifications fini
 
             // Afficher la page des notifications admin
             Route::get('/notification-admin', [NotificationController::class, 'index'])->name('notifications.admin');
@@ -75,7 +92,8 @@ Route::middleware(['auth.check'])->group(function () {
             //Supprimer une notification existante
             Route::delete('/notifications/{id}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
 
-        // Gestion des historiques
+
+        // Gestion des historiques fini
 
             // Afficher la page des historiques admin
             Route::get('/historique-admin', [EventController::class, 'index'])->name('events.index');
@@ -86,21 +104,24 @@ Route::middleware(['auth.check'])->group(function () {
             //Supprimer un historique existant
             Route::delete('/historique-admin/{event}', [EventController::class, 'destroy'])->name('events.destroy'); 
 
-        // Gestion de la deconnexion admin
+
+        // Gestion de la deconnexion admin fini
 
             // Afficher la vue de déconnexion
             Route::get('/deconnection-admin', [DexController::class, 'indexvue'])->name('logout.view');
             // Traiter la déconnexion
             Route::get('/deconnection-admin/confirm', [DexController::class, 'logoutadmin'])->name('logout.admin');
 
-         // Gestion des messages contact admin
+
+         // Gestion des messages contact admin fini
 
             // Afficher la liste des messages contact
             Route::get('/administration', [ContactAdminController::class, 'index'])->name('admin.contacts.index');
             // Supprimer un message contact
             Route::delete('/administration/{id}', [ContactAdminController::class, 'destroy'])->name('admin.contacts.destroy');  
             
-        // Gestion des contacts-admin utilisateur
+
+        // Gestion des contacts-admin utilisateur fini
 
             // Afficher la page des contacts-admin utilisateur
             Route::get('/contact-admin', [ajoutposteController::class, 'index'])->name('contact.admin');
@@ -110,38 +131,45 @@ Route::middleware(['auth.check'])->group(function () {
             Route::delete('/contact-admin/{id}', [ajoutposteController::class, 'destroy'])->name('employees.destroy');
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Site utilisateur 
 
 // page Contact Commentaire
+
+//affiche la page
 Route::get('/contact-user', [ContactController::class, 'index'])->name('contact.user'); 
+// traite la page
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-// page Contact Commentaire via MessageController    
+
+// page Contact Commentaire via MessageController dans page contact en bas    
 Route::post('/contact-user', [MessageController::class, 'store'])->name('message.store');
 
 
 
 
-// page activiter user
+// page activiter user récuperation juste
 Route::get('/Activiter-user', [activiteruserController::class, 'index'])
     ->name('activiter.user');
 
-// Historique site public
+// Historique site public récuperation juste
 Route::get('/A propos-user', [eventsiteController::class, 'index'])->name('eventsite.index');
-
-
-
-
-// Page commentaire admin
-Route::get('/commentaire-admin', function () {
-    return view('commentaire-admin');
-});
-
-// Page activites admin
-Route::get('/activites-admin', function () {
-    return view('activites-admin');
-});
-
 
 
 
